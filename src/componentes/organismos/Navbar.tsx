@@ -28,9 +28,27 @@ export const Navbar = () => {
             <li className="nav-item">
               <Link className="nav-link" to="/admin">Administración</Link>
             </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/login">Iniciar Sesión</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/registro">Registrarse</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/nosotros">Nosotros</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/contacto">Contacto</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/novedades">Novedades</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/mis-reservas">Mis Reservas</Link>
+            </li>
           </ul>
         </div>
       </div>
     </nav>
   );
-};
+}
