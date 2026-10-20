@@ -25,23 +25,23 @@ export const Registro = () => {
 
   const validar = () => {
     const e: Record<string, string> = {};
-    if (!formData.rut) e.rut = 'Obligatorio.';
+    if (!formData.rut) e.rut = 'El RUT es obligatorio.';
     else if (!validarRut(formData.rut)) e.rut = 'RUT inválido. Ingrese sin puntos ni guión (Ej: 123456789).';
     
-    if (!formData.nombre) e.nombre = 'Obligatorio.';
+    if (!formData.nombre) e.nombre = 'El nombre es obligatorio.';
     else if (formData.nombre.length > 50) e.nombre = 'Máximo 50 caracteres.';
     
-    if (!formData.apellidos) e.apellidos = 'Obligatorio.';
+    if (!formData.apellidos) e.apellidos = 'Los apellidos son obligatorios.';
     else if (formData.apellidos.length > 100) e.apellidos = 'Máximo 100 caracteres.';
     
-    if (!formData.correo) e.correo = 'Obligatorio.';
+    if (!formData.correo) e.correo = 'El correo es obligatorio.';
     else if (formData.correo.length > 100) e.correo = 'Máximo 100 caracteres.';
     else if (!validarCorreo(formData.correo)) e.correo = 'Formato inválido.';
     
-    if (!formData.region) e.region = 'Seleccione región.';
-    if (!formData.comuna) e.comuna = 'Seleccione comuna.';
+    if (!formData.region) e.region = 'Debes seleccionar una región.';
+    if (!formData.comuna) e.comuna = 'Debes seleccionar una comuna.';
     
-    if (!formData.direccion) e.direccion = 'Obligatorio.';
+    if (!formData.direccion) e.direccion = 'La dirección es obligatoria.';
     else if (formData.direccion.length > 300) e.direccion = 'Máximo 300 caracteres.';
 
     setErrores(e);
