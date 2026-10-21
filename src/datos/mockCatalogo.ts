@@ -1,4 +1,3 @@
-// src/datos/mockCatalogo.ts
 import type { Servicio, Medicamento } from '../tipos/catalogo';
 
 export const serviciosIniciales: Servicio[] = [

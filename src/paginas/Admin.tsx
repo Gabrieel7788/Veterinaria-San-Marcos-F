@@ -25,6 +25,17 @@ export const Admin = () => {
     }
   };
 
+  // Verificar permisos
+  const usuarioActual = JSON.parse(localStorage.getItem('usuarioVet') || 'null');
+  
+  if (!usuarioActual || usuarioActual.rol !== 'admin') {
+    return (
+      <div className="alert alert-danger mt-5 text-center shadow-sm p-5 border-0">
+        <h2 className="alert-heading text-danger fw-bold">🚫 Acceso Denegado</h2>
+        <p className="lead">Esta área es exclusiva para el personal administrativo.</p>
+      </div>
+    );
+  }
   return (
     <div>
       <h2 className="mb-4">Administración (CRUD)</h2>

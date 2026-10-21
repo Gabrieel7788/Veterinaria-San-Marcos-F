@@ -26,10 +26,17 @@ export const Login = () => {
     return Object.keys(nuevosErrores).length === 0;
   };
 
-  const manejarEnvio = (e: React.FormEvent) => {
+const manejarEnvio = (e: React.FormEvent) => {
     e.preventDefault();
     if (validar()) {
-      alert('Inicio de sesión exitoso (Simulado)');
+      const esAdmin = formData.correo.includes('admin');
+      const usuario = { correo: formData.correo, rol: esAdmin ? 'admin' : 'cliente' };
+      
+      // Guardar sesión en el navegador
+      localStorage.setItem('usuarioVet', JSON.stringify(usuario));
+      
+      alert(`Inicio de sesión exitoso como ${esAdmin ? 'Administrador' : 'Cliente'}`);
+      window.location.href = '/'; // Recargamos para actualizar el Navbar
     }
   };
 

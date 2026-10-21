@@ -8,8 +8,12 @@ export const MisReservas = () => {
 
   // Cargar desde LocalStorage al montar el componente
   useEffect(() => {
-    const guardadas = JSON.parse(localStorage.getItem('reservasVet') || '[]');
-    setReservas(guardadas);
+    try {
+      const guardadas = JSON.parse(localStorage.getItem('reservasVet') || '[]');
+      setReservas(guardadas);
+    } catch (error) {
+      setReservas([]);
+    }
   }, []);
 
   const eliminarReserva = (indexAEliminar: number) => {
@@ -23,18 +27,20 @@ export const MisReservas = () => {
     localStorage.removeItem('reservasVet');
   };
 
-  // Calcular el total sumando los precios de cada elemento
   const total = reservas.reduce((suma, servicio) => suma + servicio.precio, 0);
 
+  // Vista cuando no hay reservas
   if (reservas.length === 0) {
     return (
-      <div className="text-center mt-5">
-        <h3 className="text-muted">No tienes servicios en tu lista de reservas</h3>
-        <Link to="/catalogo" className="btn btn-primary mt-3">Ir al Catálogo</Link>
+      <div className="text-center mt-5 p-5 bg-light rounded shadow-sm border-0">
+        <h2 className="text-muted mb-3">🛒 Tu lista de reservas está vacía</h2>
+        <p className="lead mb-4">Aún no has agregado ningún servicio para tu mascota.</p>
+        <Link to="/catalogo" className="btn btn-primary btn-lg">Explorar Catálogo</Link>
       </div>
     );
   }
 
+  // Vista cuando sí hay reservas
   return (
     <div className="row justify-content-center">
       <div className="col-md-8">
