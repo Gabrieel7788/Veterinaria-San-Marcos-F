@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { serviciosIniciales } from '../datos/mockCatalogo';
-
+import imagenInicio from '../assets/perrofeliz.jpg';
 export const Inicio = () => {
   // Tomamos solo los 3 primeros servicios para destacarlos
   const serviciosDestacados = serviciosIniciales.slice(0, 3);
@@ -20,7 +20,7 @@ export const Inicio = () => {
         </div>
         <div className="col-md-6 mt-4 mt-md-0">
           <img 
-            src="https://images.unsplash.com/photo-1628009368231-7bb7cbcb8122?q=80&w=800&auto=format&fit=crop" 
+            src={imagenInicio} 
             alt="Perro feliz en veterinaria" 
             className="img-fluid rounded shadow"
           />

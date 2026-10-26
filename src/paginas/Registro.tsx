@@ -56,7 +56,7 @@ export const Registro = () => {
   return (
     <div className="card shadow-sm border-0 bg-light p-4 mx-auto" style={{ maxWidth: '800px' }}>
       <h3 className="mb-4 text-primary text-center">Registro de Usuario</h3>
-      <form onSubmit={manejarEnvio} className="row">
+      <form onSubmit={manejarEnvio} noValidate className="row">
         <div className="col-md-6"><GrupoInput label="RUT (Sin puntos ni guión)" name="rut" value={formData.rut} onChange={manejarCambio} mensajeError={errores.rut} /></div>
         <div className="col-md-6"><GrupoInput label="Tipo de Usuario" name="tipoUsuario" value={formData.tipoUsuario} onChange={manejarCambio} esSelect opciones={[{valor: 'Cliente', texto: 'Dueño de mascota'}, {valor: 'Admin', texto: 'Administrador'}]} /></div>
         <div className="col-md-6"><GrupoInput label="Nombres" name="nombre" value={formData.nombre} onChange={manejarCambio} mensajeError={errores.nombre} /></div>
