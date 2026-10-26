@@ -15,9 +15,7 @@ export const Nosotros = () => {
           <div className="alert alert-info mt-4">
             <strong>Equipo Desarrollador:</strong>
             <ul className="mb-0 mt-2">
-              <li>Tu Nombre / Integrante 1</li>
-              <li>Integrante 2 (si aplica)</li>
-              <li>Integrante 3 (si aplica)</li>
+              <li>Gabriel Castro Pérez / JEFE </li>
             </ul>
           </div>
         </div>

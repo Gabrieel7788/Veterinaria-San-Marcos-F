@@ -39,7 +39,7 @@ const manejarCambio = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaEleme
 
   return (
     <div className="row justify-content-center mt-4">
-      <div className="col-md-8">
+      <div data-testid="contenedor-responsivo" className="col-12 col-md-8 col-lg-6">
         <div className="card shadow-sm border-0 bg-light p-4">
           <h2 className="text-primary mb-4 text-center">Contáctanos</h2>
           <form onSubmit={manejarEnvio}>
