@@ -11,6 +11,7 @@ import { Login } from './paginas/Login';
 import { Registro } from './paginas/Registro';
 import { Admin } from './paginas/Admin';
 import { MisReservas } from './paginas/MisReservas';
+import { Servicios } from './paginas/Servicios';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
             <Route path="/registro" element={<Registro />} />
             <Route path="/admin" element={<Admin />} />
             <Route path="/reservas" element={<MisReservas />} />
+            <Route path="/servicios" element={<Servicios />} />
           </Routes>
         </div>
         <Footer />

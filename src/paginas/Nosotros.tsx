@@ -1,3 +1,5 @@
+import examenImg from '../img/examenperrito.jpg';
+
 export const Nosotros = () => {
   return (
     <div className="container mt-4">
@@ -21,7 +23,7 @@ export const Nosotros = () => {
         </div>
         <div className="col-md-6 text-center">
           <img 
-            src="https://images.unsplash.com/photo-1599443015574-be5fe8a05783?q=80&w=800&auto=format&fit=crop" 
+            src={examenImg}
             alt="Veterinario examinando un perro" 
             className="img-fluid rounded shadow"
           />

@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom';
 import { serviciosIniciales } from '../datos/mockCatalogo';
-import imagenInicio from '../assets/perrofeliz.jpg';
+import imagenInicio from '../img/perrofeliz.jpg';
+
 export const Inicio = () => {
-  // Tomamos solo los 3 primeros servicios para destacarlos
   const serviciosDestacados = serviciosIniciales.slice(0, 3);
 
   return (
     <div>
-      {/* Sección Hero (Presentación) */}
+      {/* Sección de Presentación */}
       <div className="row align-items-center mb-5 bg-light rounded shadow-sm p-4">
         <div className="col-md-6 text-center text-md-start">
           <h1 className="display-4 fw-bold text-dark">Bienvenido a Veterinaria San Marcos</h1>
@@ -43,6 +43,14 @@ export const Inicio = () => {
           </div>
         ))}
       </div>
+
+      {/* BOTÓN "VER MÁS" */}
+      <div className="text-center mt-2 mb-5">
+        <Link to="/servicios" className="btn btn-outline-primary btn-lg px-5 rounded-pill shadow-sm">
+          Ver otros servicios
+        </Link>
+      </div>
+      
     </div>
   );
 };

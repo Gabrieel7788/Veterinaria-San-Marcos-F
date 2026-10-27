@@ -38,7 +38,7 @@ export const Admin = () => {
   }
   return (
     <div>
-      <h2 className="mb-4">Administración (CRUD)</h2>
+      <h2 className="mb-4">Administración</h2>
       
       <FormularioServicio 
         servicioAEditar={servicioAEditar} 
