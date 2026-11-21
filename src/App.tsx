@@ -12,14 +12,17 @@ import { Registro } from './paginas/Registro';
 import { Admin } from './paginas/Admin';
 import { MisReservas } from './paginas/MisReservas';
 import { Servicios } from './paginas/Servicios';
+import { Agendar } from './paginas/Agendar';
+import { MisMascotas } from './paginas/MisMascotas';
+import { MisCitas } from './paginas/MisCitas';
+import { RecepcionCitas } from './paginas/RecepcionCitas';
 
 function App() {
   return (
     <div className="d-flex flex-column min-vh-100">
       <BrowserRouter>
         <Navbar />
-        {/* El contenido principal crece para empujar el footer hacia abajo */}
-        <div className="container pb-5 flex-grow-1">
+        <div className="container-fluid pb-5 flex-grow-1">
           <Routes>
             <Route path="/" element={<Inicio />} />
             <Route path="/catalogo" element={<Catalogo />} />
@@ -32,6 +35,10 @@ function App() {
             <Route path="/admin" element={<Admin />} />
             <Route path="/reservas" element={<MisReservas />} />
             <Route path="/servicios" element={<Servicios />} />
+            <Route path="/agendar" element={<Agendar />} />          
+            <Route path="/mascotas" element={<MisMascotas />}/>
+            <Route path="/citas" element={<MisCitas />} />
+            <Route path="/recepcion" element={<RecepcionCitas />} />
           </Routes>
         </div>
         <Footer />

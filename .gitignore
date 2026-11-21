@@ -22,3 +22,15 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Backend: se subirá a otro repositorio
+/backend/
+
+# Dependencias y archivos generados
+node_modules/
+dist/
+
+# Variables privadas
+.env
+.env.*
+!.env.example

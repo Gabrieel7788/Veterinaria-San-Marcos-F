@@ -2,14 +2,14 @@ import { Link } from 'react-router-dom';
 
 export const Navbar = () => {
   // Leemos si hay un usuario conectado en el navegador
-  const usuario = JSON.parse(localStorage.getItem('usuarioVet') || 'null');
+  const usuario = JSON.parse(sessionStorage.getItem('usuarioVet') || 'null');
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary mb-4 shadow-sm">
       <div className="container">
         <Link className="navbar-brand fw-bold fs-4" to="/">🐾 Vet San Marcos</Link>
         
-        <button 
+        <button
           className="navbar-toggler" 
           type="button" 
           data-bs-toggle="collapse" 
@@ -68,20 +68,52 @@ export const Navbar = () => {
                 </a>
                 <ul className="dropdown-menu dropdown-menu-end shadow border-0">
                   <li className="px-3 py-2 text-muted small border-bottom mb-2">
-                    Rol: {usuario.rol === 'admin' ? 'Administrador' : 'Cliente'}
+                    Rol: {usuario?.rol === 'ADMINISTRADOR'? 'Administrador': 
+                    usuario?.rol === 'RECEPCIONISTA'? 'Recepcionista': 
+                    usuario?.rol === 'DUENO_MASCOTA'? 'Cliente': 'Sin rol'}
+
                   </li>
                   
-                  {/* Solo mostrar Administración si el rol es 'admin' */}
-                  {usuario.rol === 'admin' && (
+                {usuario.rol === 'DUENO_MASCOTA' && (
+                  <li>
+                    <Link className="dropdown-item" to="/mascotas">
+                      🐾 Mis Mascotas
+                    </Link>
+                  </li>
+                )}
+
+                {usuario?.rol === 'DUENO_MASCOTA' && (
+                  <li>
+                    <Link className="dropdown-item" to="/citas">
+                      📅 Mis Citas
+                    </Link>
+                  </li>
+                )}
+
+                  {/* Solo mostrar Administración si el rol es 'ADMINISTRADOR' */}
+                  {usuario.rol === 'ADMINISTRADOR' && (
                     <li><Link className="dropdown-item text-primary fw-bold" to="/admin">⚙️ Administración</Link></li>
                   )}
+
+
+                {(usuario?.rol === 'RECEPCIONISTA' ||
+                  usuario?.rol === 'ADMINISTRADOR') && (
+                  <li>
+                    <Link className="dropdown-item" to="/recepcion">
+                      📅 Gestionar Citas
+                    </Link>
+                  </li>
+                )}
+
                   
                   <li>
                     <button 
                       className="dropdown-item text-danger mt-2" 
                       onClick={() => {
-                        localStorage.removeItem('usuarioVet'); // Borramos la sesión
-                        window.location.href = '/'; // Recargamos la página principal
+                        sessionStorage.removeItem('usuarioVet');
+                        sessionStorage.removeItem('tokenVet');
+                        localStorage.removeItem('usuarioVet');
+                        window.location.href = '/';
                       }}
                     >
                       Cerrar Sesión
