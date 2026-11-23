@@ -1,75 +1,91 @@
-# React + TypeScript + Vite
+# Veterinaria San Marcos — Sistema de Gestión Veterinaria
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Descripción del proyecto
 
-Currently, two official plugins are available:
+Aplicación web desarrollada para la gestión de una clínica veterinaria. Permite administrar usuarios, registrar mascotas, consultar historiales clínicos y gestionar solicitudes de citas según el rol de cada usuario.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Proyecto desarrollado para la asignatura **Desarrollo Fullstack II (DSY1104)**, Evaluación Parcial 3.
 
-## React Compiler
+## Tecnologías utilizadas
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+**Frontend:** React, TypeScript, Vite, React Router y Bootstrap.
 
-## Expanding the ESLint configuration
+**Backend:** Java, Spring Boot, Spring Security y API REST.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+**Base de datos:** MySQL, con migraciones gestionadas mediante Flyway.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+**Seguridad:** autenticación JWT y control de acceso basado en roles.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+**Documentación:** Swagger/OpenAPI.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Roles del sistema
 
-```
+### Administrador
+- Gestión de usuarios y asignación de roles.
+- Activación y desactivación de cuentas.
+- Acceso a funciones administrativas.
+- Consulta de reportes y gestión clínica.
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+### Recepcionista
+- Consulta y gestión de solicitudes de citas.
+- Confirmación y reagendamiento de citas.
+- Registro y consulta de fichas clínicas.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Dueño de mascota
+- Registro e inicio de sesión.
+- Gestión de sus mascotas.
+- Solicitud y consulta de citas.
+- Consulta de historial clínico y avisos de vacunación.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Arquitectura
 
-```
+El frontend React consume tres microservicios independientes mediante API REST:
+
+| Microservicio | Puerto local | Responsabilidad |
+|---|---|---|
+| usuarios-service | 8080 | Autenticación y administración de usuarios |
+| mascotas-service | 8081 | Mascotas e historial clínico |
+| citas-service | 8082 | Solicitudes y gestión de citas |
+
+Cada microservicio utiliza su propia base de datos MySQL.
+
+## Ejecución local del frontend
+
+**Requisitos:** Node.js y npm.
+
+1. Clonar el repositorio.
+2. Abrir la carpeta del proyecto en una terminal.
+3. Instalar las dependencias:
+
+   `npm install`
+
+4. Iniciar el servidor de desarrollo:
+
+   `npm run dev`
+
+5. Abrir `http://localhost:5173`.
+
+Para utilizar las funciones de autenticación, mascotas y citas, deben estar ejecutándose los tres microservicios y sus respectivas bases de datos.
+
+## Seguridad
+
+El sistema utiliza JWT para autenticar las solicitudes al backend. La interfaz restringe funciones según el rol del usuario y los microservicios validan los permisos de acceso a recursos protegidos.
+
+## Documentación del backend
+
+Repositorio: https://github.com/Gabrieel7788/Veterinaria-San-Marcos-Backend
+
+Swagger local:
+
+- Usuarios: `http://localhost:8080/swagger-ui/index.html`
+- Mascotas: `http://localhost:8081/swagger-ui/index.html`
+- Citas: `http://localhost:8082/swagger-ui/index.html`
+
+## Repositorios
+
+- Frontend: https://github.com/Gabrieel7788/Veterinaria-San-Marcos-F
+- Backend: https://github.com/Gabrieel7788/Veterinaria-San-Marcos-Backend
+
+## Contexto académico
+
+Proyecto de Evaluación Parcial 3 — Desarrollo Fullstack II (DSY1104), Duoc UC.
