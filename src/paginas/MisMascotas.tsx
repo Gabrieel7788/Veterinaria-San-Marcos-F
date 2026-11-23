@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useState } from 'react';
 import type { ChangeEvent, FormEvent } from 'react';
 import { Link } from 'react-router-dom';
+import { HistorialMascota } from '../componentes/organismos/HistorialMascota';
+import { AvisosMascota } from '../componentes/organismos/AvisosMascota';
 
 interface Mascota {
   id: number;
@@ -436,6 +438,10 @@ console.log('El componente MisMascotas se está ejecutando');
                     Eliminar
                   </button>
                 </div>
+
+              <HistorialMascota mascotaId={mascota.id} />
+              
+              <AvisosMascota mascotaId={mascota.id} />
 
               </div>
             </div>

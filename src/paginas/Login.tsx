@@ -22,7 +22,14 @@ export const Login = () => {
   });
 
   const [errores, setErrores] = useState<Record<string, string>>({});
-  const [mensaje, setMensaje] = useState('');
+
+  const [mensaje, setMensaje] = useState(
+    new URLSearchParams(window.location.search)
+      .get('sesion') === 'expirada'
+      ? 'Tu sesión ha expirado. Inicia sesión nuevamente.'
+      : ''
+  );
+
   const [cargando, setCargando] = useState(false);
 
   const manejarCambio = (e: React.ChangeEvent<HTMLInputElement>) => {

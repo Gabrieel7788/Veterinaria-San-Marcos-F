@@ -1,127 +1,256 @@
 import { Link } from 'react-router-dom';
 
 export const Navbar = () => {
-  // Leemos si hay un usuario conectado en el navegador
-  const usuario = JSON.parse(sessionStorage.getItem('usuarioVet') || 'null');
+  let usuario: { rol: string } | null = null;
+
+  try {
+    const token = sessionStorage.getItem('tokenVet');
+    const datos = sessionStorage.getItem('usuarioVet');
+
+    if (token && datos) {
+      usuario = JSON.parse(datos);
+    }
+  } catch {
+    usuario = null;
+  }
+
+  const rol = usuario?.rol;
+
+  const esCliente = rol === 'DUENO_MASCOTA';
+
+  const esPersonal =
+    rol === 'ADMINISTRADOR' ||
+    rol === 'RECEPCIONISTA';
+
+  const cerrarSesion = () => {
+    sessionStorage.removeItem('usuarioVet');
+    sessionStorage.removeItem('tokenVet');
+    localStorage.removeItem('usuarioVet');
+
+    window.location.href = '/';
+  };
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary mb-4 shadow-sm">
       <div className="container">
-        <Link className="navbar-brand fw-bold fs-4" to="/">🐾 Vet San Marcos</Link>
-        
-        <button
-          className="navbar-toggler" 
-          type="button" 
-          data-bs-toggle="collapse" 
-          data-bs-target="#navbarNav"
+
+        <Link
+          className="navbar-brand fw-bold fs-4"
+          to="/"
         >
-          <span className="navbar-toggler-icon"></span>
+          🐾 Vet San Marcos
+        </Link>
+
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Abrir menú"
+        >
+          <span className="navbar-toggler-icon" />
         </button>
-        
-        <div className="collapse navbar-collapse" id="navbarNav">
-          {/* Navegación Pública (Izquierda) */}
+
+        <div
+          className="collapse navbar-collapse"
+          id="navbarNav"
+        >
+
+          {/* Navegación general */}
           <ul className="navbar-nav me-auto mb-2 mb-lg-0 gap-2">
+
             <li className="nav-item">
-              <Link className="nav-link" to="/catalogo">Catálogo</Link>
+              <Link className="nav-link" to="/catalogo">
+                Catálogo
+              </Link>
             </li>
+
             <li className="nav-item">
-              <Link className="nav-link" to="/novedades">Novedades</Link>
+              <Link className="nav-link" to="/novedades">
+                Novedades
+              </Link>
             </li>
-            {/* Dropdown Institucional */}
+
             <li className="nav-item dropdown">
-              <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+
+              <a
+                className="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+              >
                 Sobre Nosotros
               </a>
+
               <ul className="dropdown-menu">
-                <li><Link className="dropdown-item" to="/nosotros">Quiénes Somos</Link></li>
-                <li><Link className="dropdown-item" to="/contacto">Contacto</Link></li>
+                <li>
+                  <Link
+                    className="dropdown-item"
+                    to="/nosotros"
+                  >
+                    Quiénes Somos
+                  </Link>
+                </li>
+
+                <li>
+                  <Link
+                    className="dropdown-item"
+                    to="/contacto"
+                  >
+                    Contacto
+                  </Link>
+                </li>
               </ul>
+
             </li>
           </ul>
 
-          {/* Acciones de Usuario (Derecha) */}
-          <ul className="navbar-nav ms-auto align-items-center gap-3">
-            <li className="nav-item">
-              <Link className="nav-link text-warning fw-bold" to="/reservas">🛒 Mis Reservas</Link>
-            </li>
-            
-            {/* Separador visual solo en pantallas grandes */}
-            <div className="vr d-none d-lg-block text-white opacity-50"></div>
-            
-            {/* Menú Dinámico de Cuenta */}
+          {/* Cuenta de usuario */}
+          <ul className="navbar-nav ms-auto gap-2">
+
             {!usuario ? (
-              // Vista para INVITADOS (no logueados)
+
               <li className="nav-item dropdown">
-                <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+
+                <a
+                  className="nav-link dropdown-toggle"
+                  href="#"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                >
                   👤 Ingresar
                 </a>
-                <ul className="dropdown-menu dropdown-menu-end shadow border-0">
-                  <li><Link className="dropdown-item" to="/login">Iniciar Sesión</Link></li>
-                  <li><Link className="dropdown-item" to="/registro">Registrarse</Link></li>
+
+                <ul className="dropdown-menu dropdown-menu-end">
+                  <li>
+                    <Link
+                      className="dropdown-item"
+                      to="/login"
+                    >
+                      Iniciar sesión
+                    </Link>
+                  </li>
+
+                  <li>
+                    <Link
+                      className="dropdown-item"
+                      to="/registro"
+                    >
+                      Registrarse
+                    </Link>
+                  </li>
                 </ul>
+
               </li>
+
             ) : (
-              // Vista para usuarios registrados (Clientes o Administradores)
+
               <li className="nav-item dropdown">
-                <a className="nav-link dropdown-toggle fw-bold" href="#" role="button" data-bs-toggle="dropdown">
-                  🟢 Mi Cuenta
+
+                <a
+                  className="nav-link dropdown-toggle fw-bold"
+                  href="#"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                >
+                  👤 Mi Cuenta
                 </a>
+
                 <ul className="dropdown-menu dropdown-menu-end shadow border-0">
-                  <li className="px-3 py-2 text-muted small border-bottom mb-2">
-                    Rol: {usuario?.rol === 'ADMINISTRADOR'? 'Administrador': 
-                    usuario?.rol === 'RECEPCIONISTA'? 'Recepcionista': 
-                    usuario?.rol === 'DUENO_MASCOTA'? 'Cliente': 'Sin rol'}
+
+                  <li className="px-3 py-2 text-muted small border-bottom">
+
+                    Rol: {
+                      rol === 'ADMINISTRADOR'
+                        ? 'Administrador'
+                        : rol === 'RECEPCIONISTA'
+                          ? 'Recepcionista'
+                          : rol === 'DUENO_MASCOTA'
+                            ? 'Dueño de mascota'
+                            : 'Sin rol'
+                    }
 
                   </li>
-                  
-                {usuario.rol === 'DUENO_MASCOTA' && (
-                  <li>
-                    <Link className="dropdown-item" to="/mascotas">
-                      🐾 Mis Mascotas
-                    </Link>
-                  </li>
-                )}
 
-                {usuario?.rol === 'DUENO_MASCOTA' && (
-                  <li>
-                    <Link className="dropdown-item" to="/citas">
-                      📅 Mis Citas
-                    </Link>
-                  </li>
-                )}
+                  {/* Exclusivo del dueño */}
+                  {esCliente && (
+                    <>
+                      <li>
+                        <Link
+                          className="dropdown-item"
+                          to="/mascotas"
+                        >
+                          🐾 Mis Mascotas
+                        </Link>
+                      </li>
 
-                  {/* Solo mostrar Administración si el rol es 'ADMINISTRADOR' */}
-                  {usuario.rol === 'ADMINISTRADOR' && (
-                    <li><Link className="dropdown-item text-primary fw-bold" to="/admin">⚙️ Administración</Link></li>
+                      <li>
+                        <Link
+                          className="dropdown-item"
+                          to="/citas"
+                        >
+                          📅 Mis Citas
+                        </Link>
+                      </li>
+                    </>
                   )}
 
+                  {/* Exclusivo del administrador */}
+                  {rol === 'ADMINISTRADOR' && (
+                    <li>
+                      <Link
+                        className="dropdown-item"
+                        to="/admin"
+                      >
+                        ⚙️ Administración
+                      </Link>
+                    </li>
+                  )}
 
-                {(usuario?.rol === 'RECEPCIONISTA' ||
-                  usuario?.rol === 'ADMINISTRADOR') && (
+                  {/* Recepcionista y administrador */}
+                  {esPersonal && (
+                    <>
+                      <li>
+                        <Link
+                          className="dropdown-item"
+                          to="/recepcion"
+                        >
+                          📅 Gestionar Citas
+                        </Link>
+                      </li>
+
+                      <li>
+                        <Link
+                          className="dropdown-item"
+                          to="/fichas-clinicas"
+                        >
+                          🩺 Fichas Clínicas
+                        </Link>
+                      </li>
+                    </>
+                  )}
+
                   <li>
-                    <Link className="dropdown-item" to="/recepcion">
-                      📅 Gestionar Citas
-                    </Link>
+                    <hr className="dropdown-divider" />
                   </li>
-                )}
 
-                  
                   <li>
-                    <button 
-                      className="dropdown-item text-danger mt-2" 
-                      onClick={() => {
-                        sessionStorage.removeItem('usuarioVet');
-                        sessionStorage.removeItem('tokenVet');
-                        localStorage.removeItem('usuarioVet');
-                        window.location.href = '/';
-                      }}
+                    <button
+                      type="button"
+                      className="dropdown-item text-danger"
+                      onClick={cerrarSesion}
                     >
-                      Cerrar Sesión
+                      Cerrar sesión
                     </button>
                   </li>
+
                 </ul>
               </li>
+
             )}
+
           </ul>
         </div>
       </div>

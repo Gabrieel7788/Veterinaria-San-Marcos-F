@@ -10,17 +10,19 @@ import { Contacto } from './paginas/Contacto';
 import { Login } from './paginas/Login';
 import { Registro } from './paginas/Registro';
 import { Admin } from './paginas/Admin';
-import { MisReservas } from './paginas/MisReservas';
 import { Servicios } from './paginas/Servicios';
 import { Agendar } from './paginas/Agendar';
 import { MisMascotas } from './paginas/MisMascotas';
 import { MisCitas } from './paginas/MisCitas';
 import { RecepcionCitas } from './paginas/RecepcionCitas';
+import { FichasClinicas } from './paginas/FichasClinicas';
+import { ControlSesion } from './componentes/organismos/ControlSesion';
 
 function App() {
   return (
     <div className="d-flex flex-column min-vh-100">
       <BrowserRouter>
+        <ControlSesion />
         <Navbar />
         <div className="container-fluid pb-5 flex-grow-1">
           <Routes>
@@ -33,12 +35,12 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/registro" element={<Registro />} />
             <Route path="/admin" element={<Admin />} />
-            <Route path="/reservas" element={<MisReservas />} />
             <Route path="/servicios" element={<Servicios />} />
             <Route path="/agendar" element={<Agendar />} />          
             <Route path="/mascotas" element={<MisMascotas />}/>
             <Route path="/citas" element={<MisCitas />} />
             <Route path="/recepcion" element={<RecepcionCitas />} />
+            <Route path="/fichas-clinicas" element={<FichasClinicas />} />
           </Routes>
         </div>
         <Footer />
