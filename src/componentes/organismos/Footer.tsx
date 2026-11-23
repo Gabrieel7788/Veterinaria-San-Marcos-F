@@ -26,9 +26,6 @@ export const Footer = () => {
               <li className="mb-2">
                 <Link to="/catalogo" className="text-light text-opacity-75 text-decoration-none">Catálogo de Servicios</Link>
               </li>
-              <li className="mb-2">
-                <Link to="/agendar" className="text-light text-opacity-75 text-decoration-none">Agendar Hora</Link>
-              </li>
             </ul>
           </div>
 

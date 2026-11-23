@@ -57,7 +57,7 @@ export const Catalogo = () => {
                   ${servicio.precio.toLocaleString('es-CL')}
                 </p>
 
-                {/* Solo clientes pueden agendar citas */}
+
                 {esCliente && (
                   <Link
                     to="/citas"

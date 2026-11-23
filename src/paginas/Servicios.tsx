@@ -47,7 +47,7 @@ export const Servicios = () => {
       </div>
 
       <div className="text-center mt-5">
-        <Link to="/contacto" className="btn btn-primary me-3">Agendar Hora</Link>
+        <Link to="/contacto" className="btn btn-primary me-3">Contactar a la Clínica</Link>
         <Link to="/" className="btn btn-outline-secondary">Volver al Inicio</Link>
       </div>
     </div>

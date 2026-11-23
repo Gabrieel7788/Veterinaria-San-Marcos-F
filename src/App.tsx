@@ -11,7 +11,6 @@ import { Login } from './paginas/Login';
 import { Registro } from './paginas/Registro';
 import { Admin } from './paginas/Admin';
 import { Servicios } from './paginas/Servicios';
-import { Agendar } from './paginas/Agendar';
 import { MisMascotas } from './paginas/MisMascotas';
 import { MisCitas } from './paginas/MisCitas';
 import { RecepcionCitas } from './paginas/RecepcionCitas';
@@ -36,7 +35,6 @@ function App() {
             <Route path="/registro" element={<Registro />} />
             <Route path="/admin" element={<Admin />} />
             <Route path="/servicios" element={<Servicios />} />
-            <Route path="/agendar" element={<Agendar />} />          
             <Route path="/mascotas" element={<MisMascotas />}/>
             <Route path="/citas" element={<MisCitas />} />
             <Route path="/recepcion" element={<RecepcionCitas />} />
